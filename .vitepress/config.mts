@@ -1,0 +1,66 @@
+import { defineConfig } from 'vitepress'
+
+export default defineConfig({
+  lang: 'zh-CN',
+  title: "CoCo 自定义控件",
+  description: "如果恰巧你会 JavaScript 的话，那么，更广阔的世界在向你招手！",
+  srcDir: 'docs',
+  themeConfig: {
+    outline: {
+      label: '目录'
+    },
+    nav: [
+      { text: '主页', link: '/' },
+      { text: '指南', link: '/指南/快速上手' },
+      { text: 'API参考', link: '/API参考' },
+      { text: '控件商城', link: '/控件商城' },
+      {
+        text: '工具', items: [
+          { text: '编程猫网盘', link: 'https://shequ.pgaot.com/?mod=codemaocdn' },
+          { text: 'Waddle', link: 'https://waddle.cocotais.cn/' },
+          { text: 'DuckSeek写控件', link: 'https://chat.deepseek.com/' },
+          { text: 'CWLS-控件测试助手', link: '#' }
+        ]
+      }
+    ],
+    sidebar: [
+      {
+        text: '指南', items: [
+          { text: '快速上手', link: '/指南/快速上手' },
+          { text: '手把手教你写控件', link: '/指南/手把手教你写控件' },
+          { text: '模块文档', link: '/指南/模块文档' },
+          { text: 'Waddle手册', link: 'https://www.yuque.com/zaona/waddle/' },
+        ]
+      },
+      {
+        text: 'API参考', link:"/API参考/", items: [
+          {
+            text: 'types 控件类型', link: '/API参考/types/' , collapsed: false, items: [
+              { text: 'methods 方法', link: '/API参考/types/methods' },
+              { text: 'properties 属性', link: '/API参考/types/properties' },
+              { text: 'events 事件', link: '/API参考/types/events' },
+            ]
+          },
+          { text: 'widget 控件实体', link: '/API参考/widget' },
+          { text: 'exports 导出', link: '/API参考/exports' }
+        ]
+      },
+      {
+        text: '控件商城', items: [
+          { text: '主页', link: '/控件商城' },
+          { text: '控件要求', link: '/控件商城/控件要求' },
+        ]
+      }
+    ],
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+    ],
+    lastUpdated: {
+      text: '最后更新于',
+      formatOptions: {
+        dateStyle: 'full',
+        timeStyle: 'medium'
+      }
+    }
+  }
+})
