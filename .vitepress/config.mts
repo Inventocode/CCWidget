@@ -45,6 +45,11 @@ export default defineConfig({
           { text: 'exports 导出', link: '/API参考/exports' }
         ]
       },
+      { text: '实用工具', link: '/实用工具/', items: [
+          { text: 'CCQI 快速导入', link: '/实用工具/CCQI' },
+          { text: 'CCWMP 新概念控件商城', link: '/实用工具/CCWMP' }
+        ]
+      },
       {
         text: '控件商城', items: [
           { text: '主页', link: '/控件商城' },
