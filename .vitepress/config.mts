@@ -13,6 +13,7 @@ export default defineConfig({
       { text: '主页', link: '/' },
       { text: '指南', link: '/指南/快速上手' },
       { text: 'API参考', link: '/API参考' },
+      { text: '实用工具', link: '/实用工具/'},
       { text: '控件商城', link: '/控件商城' },
       {
         text: '工具', items: [
@@ -58,13 +59,48 @@ export default defineConfig({
       }
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'gitee', link: 'https://gitee.com/Inventocode/coco-custom-widget' },
+      { icon: 'github', link: 'https://github.com/Inventocode/ccwidget' }
     ],
     lastUpdated: {
       text: '最后更新于',
       formatOptions: {
         dateStyle: 'full',
         timeStyle: 'medium'
+      }
+    },
+    docFooter: {
+      prev: '上一页',
+      next: '下一页'
+    },
+    search: {
+      provider: 'local',
+      options: {
+        locales: {
+          zh: {
+            translations: {
+              button: {
+                buttonText: '搜索',
+                buttonAriaLabel: '搜索'
+              },
+              modal: {
+                displayDetails: '显示详细列表',
+                resetButtonTitle: '重置搜索',
+                backButtonTitle: '关闭搜索',
+                noResultsText: '没有结果',
+                footer: {
+                  selectText: '选择',
+                  selectKeyAriaLabel: '输入',
+                  navigateText: '导航',
+                  navigateUpKeyAriaLabel: '上箭头',
+                  navigateDownKeyAriaLabel: '下箭头',
+                  closeText: '关闭',
+                  closeKeyAriaLabel: 'esc'
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
