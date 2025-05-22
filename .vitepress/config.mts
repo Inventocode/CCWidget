@@ -7,20 +7,20 @@ export default defineConfig({
   srcDir: 'docs',
   themeConfig: {
     outline: {
-      label: '目录'
+      label: '目录',
+      level: 'deep',
     },
     nav: [
       { text: '主页', link: '/' },
       { text: '指南', link: '/指南/快速上手' },
-      { text: 'API参考', link: '/API参考' },
-      { text: '实用工具', link: '/实用工具/'},
+      { text: '参考', link: '/API参考' },
+      { text: '工具', link: '/实用工具/'},
       { text: '控件商城', link: '/控件商城' },
       {
-        text: '工具', items: [
+        text: '站外工具', items: [
           { text: '编程猫网盘', link: 'https://shequ.pgaot.com/?mod=codemaocdn' },
           { text: 'Waddle', link: 'https://waddle.cocotais.cn/' },
-          { text: 'DuckSeek写控件', link: 'https://chat.deepseek.com/' },
-          { text: 'CWLS-控件测试助手', link: '#' }
+          { text: 'DuckSeek写控件', link: 'https://chat.deepseek.com/' }
         ]
       }
     ],
@@ -48,13 +48,13 @@ export default defineConfig({
       },
       { text: '实用工具', link: '/实用工具/', items: [
           { text: 'CCQI 快速导入', link: '/实用工具/CCQI' },
-          { text: 'CCWMP 新概念控件商城', link: '/实用工具/CCWMP' }
+          { text: 'CCWMP 新概念控件商城', link: '/实用工具/CCWMP' },
+          { text: 'CWLS 控件测试助手', link: '/实用工具/CWLS' }
         ]
       },
       {
-        text: '控件商城', items: [
-          { text: '主页', link: '/控件商城' },
-          { text: '控件要求', link: '/控件商城/控件要求' },
+        text: '控件商城', link: '/控件商城', items: [
+          { text: '控件要求', link: '/控件商城/控件要求' }
         ]
       }
     ],
