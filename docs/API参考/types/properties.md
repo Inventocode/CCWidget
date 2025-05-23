@@ -120,6 +120,83 @@
 - 类型：`boolean`
 ## unit
 属性 `valueType` 为 `'number'` 
+
 ## validators
 属性值检查器
 - 类型：`object`
+### lessThan
+检查属性 `valueType` 为 `'number'` 时是否小于指定值
+- 类型：`object`
+#### value
+指定值
+- 类型：`number`
+#### message
+不满足条件时的报错信息
+- 类型：`string`
+
+
+### greaterThan
+检查属性 `valueType` 为 `'number'` 时是否大于指定值
+- 类型：`object`
+#### value
+指定值
+- 类型：`number`
+#### message
+不满足条件时的报错信息
+- 类型：`string`
+
+
+### isInteger
+检查属性 `valueType` 为 `'number'` 时是否为整数
+- 类型：`object`
+#### value
+是否为整数
+- 类型：`boolean`
+#### message
+不满足条件时的报错信息
+- 类型：`string`
+
+
+### notEmpty
+检查属性 `valueType` 为 `'string'` 时是否不为空
+- 类型：`object`
+#### value
+是否不为空
+- 类型：`boolean`
+#### message
+不满足条件时的报错信息
+- 类型：`string`
+
+### maxLength
+检查属性 `valueType` 为 `'string'` 时是否小于指定长度
+#### value
+指定长度
+- 类型：`number`
+#### message
+不满足条件时的报错信息
+- 类型：`string`
+
+### minLength
+检查属性 `valueType` 为 `'string'` 时是否大于指定长度
+#### value
+指定长度
+- 类型：`number`
+#### message
+不满足条件时的报错信息
+
+## dropdown
+属性值下拉列表
+- 类型：`object[]`
+### value
+属性下拉选项值，属性内唯一，标识不同属性值选项
+- 类型：`any`
+### label
+属性值下拉选项文本
+- 类型：`string`
+
+## tooltip
+积木提示，鼠标悬浮在积木上显示
+- 类型：`string`
+
+## blockOptions
+<!--@include: ./blockOptions.md-->
