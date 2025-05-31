@@ -1,9 +1,18 @@
 
 ::: tip 同步提示
-blockOptions 文档同步在三种积木文档
+以下文档为通用blockOptions
+
+支持`property, property.getter, property.setter, method, event`
 :::
 
-积木配置
-- 类型：`object`
+### generateBlock
+是否在积木盒生成积木
+- 类型：`boolean`
 
-待补充
+### line
+积木盒中此积木上方行标签
+- 类型：`string`
+
+### space
+积木盒中此积木下方间距
+- 类型：`number`

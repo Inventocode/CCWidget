@@ -127,5 +127,6 @@ min 和 max 值推荐设置为整数，否则滑条可能异常，设置此属�
 积木提示，鼠标悬浮在积木上显示
 - 类型：`string`
 ## blockOptions
-
+积木配置
+- 类型：`object`
 <!--@include: ./blockOptions.md-->
