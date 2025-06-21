@@ -1,8 +1,6 @@
 
-::: tip 同步提示
-以下文档为通用blockOptions
-
-支持`property, property.getter, property.setter, method, event`
+::: tip 同步文档
+以下为通用blockOptions
 :::
 
 ### generateBlock
@@ -16,3 +14,16 @@
 ### space
 积木盒中此积木下方间距
 - 类型：`number`
+
+### order
+积木盒中此积木位置
+- 类型：`number`
+::: tip
+默认事件积木从`10001`依次递增`1`
+
+默认方法积木从`20001`依次递增`1`
+
+默认修改属性积木从`30001`依次递增`1`
+
+默认读取属性积木从`40001`依次递增`1`
+:::

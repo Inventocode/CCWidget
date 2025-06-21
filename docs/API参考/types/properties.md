@@ -91,39 +91,39 @@
 | Color | 颜色 |
 | FontFamily | 字体 |
 
-::: details 更多（但可能没什么用）
-| 参考值 | 功能 |
-| --- | --- |
-| WidgetTitle | 控件名称 |
-| VisibleSwitch | 显示开关 |
-| DisabledSwitch | 禁用开关 |
-| Headline | 单选/多选框题干 |
-| NumberInputRow | 数字输入 |
-| DegreeInputRow | 角度输入 |
-| FlipInputRow | 水平垂直二合一开关 |
-| Coordinate | XY坐标输入 |
-| ScaleInputRow | 可锁定比例的宽高输入 |
-| WidgetOpacity | 不透明度 |
-| BackgroundColor | 背景颜色（与颜色相同） |
-| HttpBody | POST请求文本 |
-| HttpHeader | 请求头 |
-| HttpParams | GET请求参数 |
-| audioVolume | 音量条 |
-| audioRate | 音速条 |
-| AudioChangeSoundFile | 音源 |
-| DictFields | 云字典数据源 |
-| ListNewDataSource | 数据表数据源（本地+云 二合一） |
-| TableFields | 云数据表数据源 |
-| LocalStorageFields | 微数据库初始数据 |
-| CloudDbList | 未知，显示数据加载中 |
-| ListViewerDataSource | （未知）表格数据源
-| ListViewerStyleTemplate | 列表数据框样式 |
-| WarningFields | 停止服务警告 |
-| BluetoothConnect | 蓝牙 |
-| AqaraAuth | 绿米 |
-| PreviewImage | 对话框预览效果，值为对话框的主题色 |
-| BrushDrawProcess | （未知）绘画过程开关 |
-| BrushPenColor | （未知）颜色及光标形状 |
+::: details 更多参考值（但可能没什么用）
+| 参考值 | 功能 | 说明 |
+| --- | --- | --- |
+| WidgetTitle | 控件名称 |  |
+| VisibleSwitch | 显示开关 |  |
+| DisabledSwitch | 禁用开关 |  |
+| Headline | 单选/多选框题干 |  |
+| NumberInputRow | 数字输入 |  |
+| DegreeInputRow | 角度输入 |  |
+| FlipInputRow | 水平垂直二合一开关 |  |
+| Coordinate | XY坐标输入 |  |
+| ScaleInputRow | 可锁定比例的宽高输入 |  |
+| WidgetOpacity | 不透明度 |  |
+| BackgroundColor | 背景颜色（与颜色相同） |  |
+| HttpBody | POST请求文本 |  |
+| HttpHeader | 请求头 | 格式：`[{'key':'114', 'value':'514'}]` |
+| HttpParams | GET请求参数 |  |
+| audioVolume | 音量条 |  |
+| audioRate | 音速条 |  |
+| AudioChangeSoundFile | 音源 |  |
+| DictFields | 云字典数据源 |  |
+| ListNewDataSource | 数据表数据源（本地+云 二合一） |  |
+| TableFields | 云数据表数据源 |  |
+| LocalStorageFields | 微数据库初始数据 |  |
+| CloudDbList | 未知，显示数据加载中 |  |
+| ListViewerDataSource | （未知）表格数据源  |
+| ListViewerStyleTemplate | 列表数据框样式 |  |
+| WarningFields | 停止服务警告 |  |
+| BluetoothConnect | 蓝牙 |  |
+| AqaraAuth | 绿米 |  |
+| PreviewImage | 对话框预览效果 | 值为对话框的主题色 |
+| BrushDrawProcess | （未知）绘画过程开关 |  |
+| BrushPenColor | （未知）颜色及光标形状 |  |
 :::
 ::: tip `@SLIGHTNING`の提示
 ![](https://static.codemao.cn/flowchunkflex/r1CQnDuGgg.png)
@@ -225,4 +225,18 @@ ListViewerDataSource 需要设置 templateSlotMap 属性
 ## blockOptions
 积木配置
 - 类型：`object`
+### getter
+属性获取积木的`blockOptions`
+- 类型：`object`
+#### keys
+获取积木的下拉列表（通过一块积木获取多个属性）
+- 类型：`string[]`
+- 示例：`['prop1', 'prop2']`
+### setter
+属性设置积木的`blockOptions`
+- 类型：`object`
+#### keys
+设置积木的下拉列表（通过一块积木设置多个属性）
+- 类型：`string[]`
+- 示例：`['prop1', 'prop2']`
 <!--@include: ./blockOptions.md-->

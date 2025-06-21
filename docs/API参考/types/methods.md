@@ -48,6 +48,11 @@
 
 - 类型：`string`
 - 示例：`'（必填）'`
+
+### defaultValue
+参数默认值
+- 类型：`any`
+
 ### valueType
 参数类型，影响编辑器内积木嵌套
 
@@ -123,10 +128,26 @@ min 和 max 值推荐设置为整数，否则滑条可能异常，设置此属�
 是否显示选项图片
 - 类型：`boolean`
 - 默认值：`true`
+
 ## tooltip
 积木提示，鼠标悬浮在积木上显示
 - 类型：`string`
+
 ## blockOptions
 积木配置
 - 类型：`object`
+
+### icon
+积木图标
+- 类型：`string`
+### color
+积木颜色
+- 类型：`string`
+### inputsInline
+积木是否为单行
+- 类型：`boolean`
+### callMethodLabel
+积木前标签
+- 类型：`boolean | string`
+
 <!--@include: ./blockOptions.md-->
