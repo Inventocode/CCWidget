@@ -49,7 +49,8 @@ export default defineConfig({
       { text: '实用工具', link: '/实用工具/', items: [
           { text: 'CCQI 快速导入', link: '/实用工具/CCQI' },
           { text: 'CCWMP 新概念控件商城', link: '/实用工具/CCWMP' },
-          { text: 'CWLS 控件测试助手', link: '/实用工具/CWLS' }
+          { text: 'CWLS 控件测试助手', link: '/实用工具/CWLS' },
+          { text: 'CCPP 自动改包', link: '/实用工具/CCPP' },
         ]
       },
       {
