@@ -51,6 +51,7 @@ export default defineConfig({
           { text: 'CCWMP 新概念控件商城', link: '/实用工具/CCWMP' },
           { text: 'CWLS 控件测试助手', link: '/实用工具/CWLS' },
           { text: 'CCPP 自动改包', link: '/实用工具/CCPP' },
+          { text: 'ILQ 我爱Qii', link: '/实用工具/ILQ' },
         ]
       },
       {

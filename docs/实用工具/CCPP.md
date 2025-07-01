@@ -10,7 +10,14 @@
 （云改包由Luoying Team提供支持）
 ## 安装
 
-[CCPP-1.0.user.js](https://static.codemao.cn/flowchunkflex/HyJKcLWrgl.js)
+::: tip [CCPP-1.1.user.js](https://static.codemao.cn/flowchunkflex/r13i3dWrle.js)
+优化了改包逻辑，将弹窗改为按钮
+:::
+
+::: tip [CCPP-1.0.user.js](https://static.codemao.cn/flowchunkflex/HyJKcLWrgl.js)
+好用好用！
+:::
+
 <!--@include: ./userscript_install.md-->
 
 ## 使用
