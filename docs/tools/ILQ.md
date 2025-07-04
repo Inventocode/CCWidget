@@ -7,7 +7,7 @@
 
 功能：将所有可替换的原生控件替换为Qii控件
 
-需要提前导入Qii控件，建议搭配[CCWMP](/实用工具/CCWMP)使用
+需要提前导入Qii控件，建议搭配[CCWMP](/tools/CCWMP)使用
 ## 安装
 
 ::: tip [ILOVEQII.user.js](https://static.codemao.cn/flowchunkflex/H1pvAd-Sgl.js)

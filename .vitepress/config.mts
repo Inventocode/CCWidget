@@ -14,7 +14,7 @@ export default defineConfig({
       { text: '主页', link: '/' },
       { text: '指南', link: '/指南/快速上手' },
       { text: '参考', link: '/API参考' },
-      { text: '工具', link: '/实用工具/'},
+      { text: '工具', link: '/tools/'},
       { text: '控件商城', link: '/控件商城' },
       {
         text: '站外工具', items: [
@@ -46,12 +46,13 @@ export default defineConfig({
           { text: 'exports 导出', link: '/API参考/exports' }
         ]
       },
-      { text: '实用工具', link: '/实用工具/', items: [
-          { text: 'CCQI 快速导入', link: '/实用工具/CCQI' },
-          { text: 'CCWMP 新概念控件商城', link: '/实用工具/CCWMP' },
-          { text: 'CWLS 控件测试助手', link: '/实用工具/CWLS' },
-          { text: 'CCPP 自动改包', link: '/实用工具/CCPP' },
-          { text: 'ILQ 我爱Qii', link: '/实用工具/ILQ' },
+      { text: '实用工具', link: '/tools/', items: [
+          { text: '[在线]控件限制快查', link: '/LQS.html' },
+          { text: 'CCQI 快速导入', link: '/tools/CCQI' },
+          { text: 'CCWMP 新概念控件商城', link: '/tools/CCWMP' },
+          { text: 'CWLS 控件测试助手', link: '/tools/CWLS' },
+          { text: 'CCPP 自动改包', link: '/tools/CCPP' },
+          { text: 'ILQ 我爱Qii', link: '/tools/ILQ' },
         ]
       },
       {

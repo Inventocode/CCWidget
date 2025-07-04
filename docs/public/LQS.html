@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoCo控件限制快查</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 25px;
+            gap: 25px;
+        }
+        
+        .input-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .output-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1a2a6c;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .code-input {
+            width: 100%;
+            height: 350px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: #f8f9fa;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        
+        .code-input:focus {
+            border-color: #1a2a6c;
+            outline: none;
+        }
+        
+        .upload-area {
+            border: 2px dashed #1a2a6c;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin: 15px 0;
+            background: #f0f5ff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .upload-area:hover {
+            background: #e0ebff;
+            border-color: #b21f1f;
+        }
+        
+        .upload-area i {
+            font-size: 3rem;
+            color: #1a2a6c;
+            margin-bottom: 15px;
+        }
+        
+        .upload-text {
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        button i {
+            margin-right: 8px;
+        }
+        
+        .check-btn {
+            background: linear-gradient(to right, #1a2a6c, #2c3e9d);
+            color: white;
+        }
+        
+        .check-btn:hover {
+            background: linear-gradient(to right, #2c3e9d, #3d51c7);
+            transform: translateY(-2px);
+        }
+        
+        .clear-btn {
+            background: linear-gradient(to right, #b21f1f, #d9534f);
+            color: white;
+        }
+        
+        .clear-btn:hover {
+            background: linear-gradient(to right, #d9534f, #e67e22);
+            transform: translateY(-2px);
+        }
+        
+        .results {
+            height: 500px;
+            overflow-y: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        
+        .result-item {
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            display: flex;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .error {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+        
+        .warn {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .line-number {
+            display: inline-block;
+            width: 60px;
+            font-weight: bold;
+            color: #1a2a6c;
+        }
+        
+        .summary {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 8px;
+        }
+        
+        .summary h3 {
+            margin-bottom: 10px;
+            color: #1a2a6c;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .stat-box {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .errors-box {
+            background: #ffebee;
+            color: #f44336;
+        }
+        
+        .warnings-box {
+            background: #fff8e1;
+            color: #ffc107;
+        }
+        
+        .lines-box {
+            background: #e8f5e9;
+            color: #4caf50;
+        }
+        
+        .keywords {
+            margin-top: 25px;
+        }
+        
+        .keywords-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .keyword-card {
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .keyword-card.error {
+            background: #ffcdd2;
+        }
+        
+        .keyword-card.warn {
+            background: #ffecb3;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            .stats {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-shield-alt"></i> CoCo控件限制快查</h1>
+            <div class="subtitle">检测代码中的禁止关键字和限制变量</div>
+        </header>
+        
+        <div class="content">
+            <div class="input-section">
+                <h2 class="section-title"><i class="fas fa-code"></i> 输入代码</h2>
+                <textarea id="codeInput" class="code-input" placeholder="粘贴您的代码到这里，或拖入控件文件..."></textarea>
+                
+                <div id="uploadArea" class="upload-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <div class="upload-text">拖放控件文件到此处</div>
+                    <div class="upload-text">或 <span style="color:#1a2a6c;font-weight:bold">点击此处</span> 选择文件</div>
+                    <input type="file" id="fileInput" style="display: none" accept=".js,.txt,.user.js">
+                </div>
+                
+                <div class="buttons">
+                    <button id="checkBtn" class="check-btn">
+                        <i class="fas fa-search"></i> 检查代码
+                    </button>
+                    <button id="clearBtn" class="clear-btn">
+                        <i class="fas fa-trash-alt"></i> 清除内容
+                    </button>
+                </div>
+            </div>
+            
+            <div class="output-section">
+                <h2 class="section-title"><i class="fas fa-clipboard-list"></i> 检查结果</h2>
+                <div id="resultsContainer" class="results">
+                    <div style="text-align:center; padding:30px; color:#777;">
+                        <i class="fas fa-clipboard-list" style="font-size:3rem; margin-bottom:15px;"></i>
+                        <p>检查结果将显示在这里</p>
+                    </div>
+                </div>
+                
+                <div class="summary">
+                    <h3>代码统计</h3>
+                    <div class="stats">
+                        <div class="stat-box errors-box">
+                            <div>禁止关键字</div>
+                            <div id="errorCount">0</div>
+                        </div>
+                        <div class="stat-box warnings-box">
+                            <div>限制变量</div>
+                            <div id="warningCount">0</div>
+                        </div>
+                        <div class="stat-box lines-box">
+                            <div>代码行数</div>
+                            <div id="lineCount">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="keywords" style="padding:0 25px 25px;">
+            <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> 检测关键字</h2>
+            <div class="keywords-grid">
+                <div class="keyword-card error">
+                    <strong>禁止关键字:</strong>
+                    <div>parent.location</div>
+                    <div>top.location</div>
+                    <div>WebSocket</div>
+                    <div>XMLHttpRequest</div>
+                    <div>.fetch</div>
+                    <div>socketcv.codemao.cn</div>
+                </div>
+                
+                <div class="keyword-card warn">
+                    <strong>限制变量:</strong>
+                    <div>window</div>
+                    <div>getElementById</div>
+                    <div>history</div>
+                    <div>navigator</div>
+                    <div>userAgent</div>
+                    <div>localStorage</div>
+                    <div>top</div>
+                    <div>self</div>
+                    <div>parent</div>
+                    <div>frames</div>
+                    <div>opener</div>
+                    <div>fetch</div>
+                    <div>XMLHttpRequest</div>
+                    <div>location</div>
+                    <div>open</div>
+                    <div>alert</div>
+                    <div>confirm</div>
+                    <div>prompt</div>
+                    <div>print</div>
+                    <div>sessionStorage</div>
+                    <div>postMessage</div>
+                    <div>eval</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeInput = document.getElementById('codeInput');
+            const fileInput = document.getElementById('fileInput');
+            const uploadArea = document.getElementById('uploadArea');
+            const checkBtn = document.getElementById('checkBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const errorCount = document.getElementById('errorCount');
+            const warningCount = document.getElementById('warningCount');
+            const lineCount = document.getElementById('lineCount');
+            
+            // 禁止的关键字列表
+            const forbiddenKeywords = [
+                "parent.location",
+                "top.location",
+                "WebSocket",
+                "XMLHttpRequest",
+                ".fetch",
+                "socketcv.codemao.cn"
+            ];
+            
+            // 限制的变量列表
+            const restrictedVariables = [
+                "window",
+                "getElementById",
+                "history",
+                "navigator",
+                "userAgent",
+                "localStorage",
+                "top",
+                "self",
+                "parent",
+                "frames",
+                "opener",
+                "fetch",
+                "XMLHttpRequest",
+                "location",
+                "open",
+                "alert",
+                "confirm",
+                "prompt",
+                "print",
+                "sessionStorage",
+                "postMessage",
+                "eval"
+            ];
+            
+            // 点击上传区域触发文件选择
+            uploadArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            // 文件选择处理
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    readFile(file);
+                }
+            });
+            
+            // 拖放功能
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.background = '#d6e4ff';
+                uploadArea.style.borderColor = '#b21f1f';
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.background = '#f0f5ff';
+                uploadArea.style.borderColor = '#1a2a6c';
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.background = '#f0f5ff';
+                uploadArea.style.borderColor = '#1a2a6c';
+                
+                const file = e.dataTransfer.files[0];
+                if (file) {
+                    readFile(file);
+                }
+            });
+            
+            // 读取文件内容
+            function readFile(file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    codeInput.value = e.target.result;
+                    updateLineCount();
+                };
+                reader.readAsText(file);
+            }
+            
+            // 检查代码按钮
+            checkBtn.addEventListener('click', () => {
+                const code = codeInput.value;
+                if (!code.trim()) {
+                    alert('请输入代码或上传文件');
+                    return;
+                }
+                
+                checkCode(code);
+            });
+            
+            // 清除按钮
+            clearBtn.addEventListener('click', () => {
+                codeInput.value = '';
+                resultsContainer.innerHTML = `
+                    <div style="text-align:center; padding:30px; color:#777;">
+                        <i class="fas fa-clipboard-list" style="font-size:3rem; margin-bottom:15px;"></i>
+                        <p>检查结果将显示在这里</p>
+                    </div>
+                `;
+                errorCount.textContent = '0';
+                warningCount.textContent = '0';
+                lineCount.textContent = '0';
+            });
+            
+            // 代码输入时更新行数
+            codeInput.addEventListener('input', updateLineCount);
+            
+            function updateLineCount() {
+                const lines = codeInput.value.split('\n').length;
+                lineCount.textContent = lines;
+            }
+            
+            // 检查代码逻辑
+            function checkCode(code) {
+                // 重置结果
+                resultsContainer.innerHTML = '';
+                let errorTotal = 0;
+                let warningTotal = 0;
+                
+                const lines = code.split('\n');
+                let hasResults = false;
+                
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    const lineNumber = i + 1;
+                    
+                    // 检查禁止关键字
+                    for (const keyword of forbiddenKeywords) {
+                        if (line.includes(keyword)) {
+                            const resultItem = document.createElement('div');
+                            resultItem.className = 'result-item error';
+                            resultItem.innerHTML = `
+                                <div class="line-number">行 ${lineNumber}</div>
+                                <div>${keyword} <span style="color:#f44336">(禁止的关键字)</span></div>
+                            `;
+                            resultsContainer.appendChild(resultItem);
+                            errorTotal++;
+                            hasResults = true;
+                        }
+                    }
+                    
+                    // 检查限制变量
+                    for (const variable of restrictedVariables) {
+                        if (line.includes(variable)) {
+                            const resultItem = document.createElement('div');
+                            resultItem.className = 'result-item warn';
+                            resultItem.innerHTML = `
+                                <div class="line-number">行 ${lineNumber}</div>
+                                <div>${variable} <span style="color:#ffc107">(被限制的变量)</span></div>
+                            `;
+                            resultsContainer.appendChild(resultItem);
+                            warningTotal++;
+                            hasResults = true;
+                        }
+                    }
+                }
+                
+                // 如果没有结果，显示提示
+                if (!hasResults) {
+                    resultsContainer.innerHTML = `
+                        <div class="result-item" style="justify-content:center; background:#e8f5e9; border-left:4px solid #4caf50">
+                            <i class="fas fa-check-circle" style="color:#4caf50; font-size:1.5rem; margin-right:10px;"></i>
+                            <div style="font-size:1.2rem">未检测到禁止关键字或限制变量！</div>
+                        </div>
+                    `;
+                }
+                
+                // 更新统计
+                errorCount.textContent = errorTotal;
+                warningCount.textContent = warningTotal;
+                lineCount.textContent = lines.length;
+            }
+            
+            // 初始示例代码
+            codeInput.value = `// 示例代码
+function test() {
+    // 禁止关键字示例
+    const ws = new WebSocket('ws://example.com');
+    const xhr = new XMLHttpRequest();
+    fetch('https://api.example.com/data');
+    
+    // 限制变量示例
+    window.location.href = 'https://example.com';
+    localStorage.setItem('key', 'value');
+    alert('Hello World');
+    
+    // 安全代码
+    console.log('This is safe code');
+}`;
+            
+            updateLineCount();
+        });
+    </script>
+</body>
+</html>
