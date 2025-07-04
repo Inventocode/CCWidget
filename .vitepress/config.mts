@@ -53,6 +53,7 @@ export default defineConfig({
           { text: 'CWLS 控件测试助手', link: '/tools/CWLS' },
           { text: 'CCPP 自动改包', link: '/tools/CCPP' },
           { text: 'ILQ 我爱Qii', link: '/tools/ILQ' },
+          { text: 'BWL 绕控件限制', link: '/tools/BWL' },
         ]
       },
       {
