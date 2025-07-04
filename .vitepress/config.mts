@@ -47,7 +47,7 @@ export default defineConfig({
         ]
       },
       { text: '实用工具', link: '/tools/', items: [
-          { text: '[在线]控件限制快查', link: '/LQS.html' },
+          { text: '[在线]控件限制快查', link: 'https://ccwidget.top/LQS.html' },
           { text: 'CCQI 快速导入', link: '/tools/CCQI' },
           { text: 'CCWMP 新概念控件商城', link: '/tools/CCWMP' },
           { text: 'CWLS 控件测试助手', link: '/tools/CWLS' },
