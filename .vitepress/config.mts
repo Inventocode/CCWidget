@@ -20,7 +20,8 @@ export default defineConfig({
         text: '站外工具', items: [
           { text: '编程猫网盘', link: 'https://shequ.pgaot.com/?mod=codemaocdn' },
           { text: 'Waddle', link: 'https://waddle.cocotais.cn/' },
-          { text: 'DuckSeek写控件', link: 'https://chat.deepseek.com/' }
+          { text: 'DuckSeek写控件', link: 'https://chat.deepseek.com/' },
+          { text: '棕榈酸鸭AI控件', link: 'https://www.tbox.cn/share/202508APAvTl00517109' },
         ]
       }
     ],

@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoCo自定义控件代码检查工具</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=HarmonyOS+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=HarmonyOS+Sans:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/codemirror/6.65.7/codemirror.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
     <style>
         :root {
             --primary-blue: #1890ff;
@@ -15,12 +19,22 @@
             --white: #ffffff;
             --light-gray: #f5f5f5;
             --dark-gray: #595959;
-            --warning: #ffc53d;
+            --warning: #ffb300;
             --error: #ff4d4f;
             --success: #52c41a;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --radius: 12px;
             --transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --light-red: #fff1f0;
+            --medium-red: #ffccc7;
+            --dark-red: #ff4d4f;
+            --light-yellow: #fffbe6;
+            --medium-yellow: #ffe7ba;
+            --dark-yellow: #faad14;
+            --accent-blue: #1890ff;
+            --gray: #f0f0f0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -61,15 +75,20 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0) rotate(0deg);
             }
+
             25% {
                 transform: translate(20px, 40px) rotate(90deg);
             }
+
             50% {
                 transform: translate(40px, 20px) rotate(180deg);
             }
+
             75% {
                 transform: translate(20px, 0) rotate(270deg);
             }
@@ -94,6 +113,7 @@
                 transform: scale(0.95);
                 opacity: 0;
             }
+
             100% {
                 transform: scale(1);
                 opacity: 1;
@@ -117,7 +137,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
             transform: rotate(30deg);
             animation: shine 8s infinite linear;
         }
@@ -126,6 +146,7 @@
             0% {
                 transform: rotate(30deg) translateX(-100%);
             }
+
             100% {
                 transform: rotate(30deg) translateX(100%);
             }
@@ -157,9 +178,12 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-12px);
             }
@@ -177,6 +201,7 @@
             0% {
                 text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
             }
+
             100% {
                 text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
             }
@@ -193,8 +218,13 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 0.92; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 0.92;
+            }
         }
 
         .content {
@@ -204,7 +234,8 @@
             gap: 30px;
         }
 
-        .input-section, .output-section {
+        .input-section,
+        .output-section {
             flex: 1;
             min-width: 300px;
         }
@@ -248,6 +279,7 @@
         }
 
         .code-input-container {
+            height: 500px;
             position: relative;
             border-radius: var(--radius);
             overflow: hidden;
@@ -257,8 +289,15 @@
         }
 
         @keyframes slideInLeft {
-            from { transform: translateX(-30px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         .code-input-container:hover {
@@ -282,7 +321,7 @@
 
         .code-input {
             width: 100%;
-            height: 350px;
+            height: 100%;
             padding: 20px;
             border: none;
             background: var(--light-gray);
@@ -315,8 +354,15 @@
         }
 
         @keyframes slideInRight {
-            from { transform: translateX(30px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         .upload-area::before {
@@ -335,6 +381,7 @@
             0% {
                 transform: translateX(-100%);
             }
+
             100% {
                 transform: translateX(100%);
             }
@@ -382,8 +429,15 @@
         }
 
         @keyframes fadeInUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         button {
@@ -523,6 +577,7 @@
                 opacity: 0;
                 transform: translateX(30px);
             }
+
             100% {
                 opacity: 1;
                 transform: translateX(0);
@@ -633,6 +688,105 @@
         }
 
         .keywords {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-title i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+        }
+
+        .keywords-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            padding: 30px;
+        }
+
+        .keyword-card {
+            padding: 25px;
+            border-radius: 12px;
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .keyword-card.error {
+            background: var(--light-red);
+            border: 1px solid var(--medium-red);
+        }
+
+        .keyword-card.warn {
+            background: var(--light-yellow);
+            border: 1px solid var(--medium-yellow);
+        }
+
+        .keyword-card h3 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: var(--dark-blue);
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .keyword-card h3 i {
+            margin-right: 10px;
+        }
+
+        .keywords-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .keyword-tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: default;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .error .keyword-tag {
+            background: var(--light-red);
+            border: 1px solid var(--medium-red);
+            color: #c41a1a;
+        }
+
+        .warn .keyword-tag {
+            background: var(--light-yellow);
+            border: 1px solid var(--medium-yellow);
+            color: #d48806;
+        }
+
+        .keyword-tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .error .keyword-tag:hover {
+            background: #fff;
+            border-color: var(--dark-red);
+        }
+
+        .warn .keyword-tag:hover {
+            background: #fff;
+            border-color: var(--dark-yellow);
+        }
+
+        /* .keywords {
             padding: 0 30px 30px;
             animation: fadeIn 1.2s ease-out;
         }
@@ -707,7 +861,7 @@
         .keyword-card div:hover {
             background: rgba(255, 255, 255, 0.9);
             transform: translateX(5px);
-        }
+        } */
 
         /* 底部波浪动画 */
         .harmony-wave {
@@ -725,11 +879,12 @@
             0% {
                 background-position-x: 0;
             }
+
             100% {
                 background-position-x: 1200px;
             }
         }
-        
+
         /* 无结果动画 */
         .no-results {
             text-align: center;
@@ -737,7 +892,7 @@
             color: var(--dark-gray);
             animation: fadeInBounce 1s ease-out;
         }
-        
+
         .no-results i {
             font-size: 4rem;
             color: var(--primary-blue);
@@ -745,92 +900,136 @@
             display: block;
             animation: pulse 2s infinite;
         }
-        
+
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.7; }
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
         }
-        
+
         @keyframes fadeInBounce {
-            0% { opacity: 0; transform: translateY(30px); }
-            70% { opacity: 1; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            70% {
+                opacity: 1;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
+
         /* 文件上传动画 */
         .file-uploaded {
             animation: fileUploaded 0.5s ease-out;
         }
-        
+
         @keyframes fileUploaded {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+            0% {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
-        
+
         /* 结果项动画增强 */
         .result-item.animated {
             animation: resultItemAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
         @keyframes resultItemAppear {
-            0% { 
-                opacity: 0; 
-                transform: translateX(50px) rotate(5deg); 
+            0% {
+                opacity: 0;
+                transform: translateX(50px) rotate(5deg);
             }
-            70% { 
-                opacity: 1; 
-                transform: translateX(-5px) rotate(-2deg); 
+
+            70% {
+                opacity: 1;
+                transform: translateX(-5px) rotate(-2deg);
             }
-            100% { 
-                opacity: 1; 
-                transform: translateX(0) rotate(0); 
+
+            100% {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
             }
         }
-        
+
         /* 统计卡片动画 */
         .stat-box.updated {
             animation: statUpdate 0.8s ease;
         }
-        
+
         @keyframes statUpdate {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
-        
+
         /* 按钮点击动画 */
         button:active {
             transform: scale(0.98);
         }
-        
+
         /* 输入框加载动画 */
         .code-input.loading {
             background-image: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
         }
-        
+
         @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
         }
-        
+
         /* 结果容器滚动条 */
         .results-container::-webkit-scrollbar {
             width: 10px;
         }
-        
+
         .results-container::-webkit-scrollbar-track {
             background: rgba(230, 247, 255, 0.5);
             border-radius: 10px;
         }
-        
+
         .results-container::-webkit-scrollbar-thumb {
             background: var(--accent-blue);
             border-radius: 10px;
         }
-        
+
         .results-container::-webkit-scrollbar-thumb:hover {
             background: var(--dark-blue);
         }
@@ -839,7 +1038,7 @@
             .content {
                 flex-direction: column;
             }
-            
+
             .buttons {
                 flex-direction: row;
             }
@@ -849,23 +1048,23 @@
             .buttons {
                 flex-direction: column;
             }
-            
+
             .stat-box {
                 min-width: 100%;
             }
-            
+
             h1 {
                 font-size: 2.2rem;
             }
-            
+
             .subtitle {
                 font-size: 1.1rem;
             }
-            
+
             .code-input {
                 height: 300px;
             }
-            
+
             .results-container {
                 height: 400px;
             }
@@ -875,35 +1074,100 @@
             .content {
                 padding: 20px;
             }
-            
+
             header {
                 padding: 20px;
             }
-            
+
             .logo {
                 width: 50px;
                 height: 50px;
             }
-            
+
             h1 {
                 font-size: 1.8rem;
             }
-            
+
             .section-title {
                 font-size: 1.4rem;
             }
-            
+
             .filters {
                 flex-wrap: wrap;
                 justify-content: center;
             }
         }
+
+        .error-code:hover {
+            border: 1.5px solid var(--error);
+            border-radius: 2px;
+            color: var(--error);
+            background-color: #F6E8E8;
+        }
+
+        .error-code {
+            background-color: var(--error);
+            color: white;
+        }
+
+        .warn-code:hover {
+            border: 1.5px solid var(--warning);
+            border-radius: 2px;
+            color: var(--warning);
+            background-color: #F6F1E7;
+        }
+
+        .warn-code {
+            background-color: var(--warning);
+            color: white;
+        }
+
+        #floating-menu {
+            background: #fff;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.2), 0 calc(32 * 0.5px) calc((32 * 1px)) rgba(0, 0, 0, 0.24);
+            margin: 0px;
+            padding: 4px 0;
+            max-width: 368px;
+            min-width: 64px;
+            position: fixed;
+            z-index: 999999;
+            overflow: hidden;
+        }
+
+        .menu-item {
+            contain: layout;
+            overflow: visible;
+            font-family: Segoe UI, sans-serif;
+            outline: none;
+            box-sizing: border-box;
+            height: 32px;
+            grid-template-columns: minmax(32px, auto) 1fr minmax(32px, auto);
+            grid-template-rows: auto;
+            place-items: center;
+            padding: 0px;
+            margin: 0 4;
+            white-space: nowrap;
+            color: #212121;
+            fill: currentcolor;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 20px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+        }
+
+        .menu-item:hover {
+            background-color: F3F3F3;
+        }
     </style>
 </head>
+
 <body>
     <!-- 粒子背景 -->
     <div class="particles" id="particles"></div>
-    
+
     <div class="container">
         <header>
             <div class="logo-container">
@@ -917,7 +1181,7 @@
             </div>
             <div class="harmony-wave"></div>
         </header>
-        
+
         <div class="content">
             <div class="input-section">
                 <h2 class="section-title">
@@ -930,14 +1194,14 @@
                     </div>
                     <textarea id="codeInput" class="code-input" placeholder="粘贴您的代码到这里，或拖入控件文件..."></textarea>
                 </div>
-                
+
                 <div id="uploadArea" class="upload-area">
                     <i class="fas fa-cloud-upload-alt"></i>
                     <div class="upload-text">拖放控件文件到此处</div>
                     <div class="upload-text">或 <span class="highlight">点击此处</span> 选择文件</div>
                     <input type="file" id="fileInput" style="display: none" accept=".js,.txt,.user.js,.ts,.html,.css">
                 </div>
-                
+
                 <div class="buttons">
                     <button id="checkBtn" class="check-btn">
                         <i class="fas fa-search"></i> 检查代码
@@ -953,7 +1217,7 @@
                     </button>
                 </div>
             </div>
-            
+
             <div class="output-section">
                 <h2 class="section-title">
                     <i class="fas fa-clipboard-list"></i> 检查结果
@@ -970,19 +1234,20 @@
                             <button class="filter-btn" data-filter="warn">
                                 <i class="fas fa-exclamation-triangle"></i> 警告
                             </button>
-                            <button class="filter-btn" data-filter="safe">
+                            <!-- <button class="filter-btn" data-filter="safe">
                                 <i class="fas fa-check-circle"></i> 安全
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                     <div id="resultsContainer" class="results">
                         <div style="text-align:center; padding:50px 20px; color:#666; font-size:1.1rem;">
-                            <i class="fas fa-clipboard-list" style="font-size:3rem; margin-bottom:20px; color:var(--primary-blue);"></i>
+                            <i class="fas fa-clipboard-list"
+                                style="font-size:3rem; margin-bottom:20px; color:var(--primary-blue);"></i>
                             <p>输入代码后点击"检查代码"，结果将显示在这里</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="summary">
                     <h3><i class="fas fa-chart-bar"></i> 代码统计</h3>
                     <div class="stats">
@@ -1002,395 +1267,391 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="keywords">
-            <h2 class="section-title">
+            <h2 class="section-title" style="margin-left: 30px;">
                 <i class="fas fa-exclamation-triangle"></i> 检测关键字
             </h2>
             <div class="keywords-grid">
                 <div class="keyword-card error">
-                    <strong>禁止关键字:</strong>
-                    <div>parent.location</div>
-                    <div>top.location</div>
-                    <div>WebSocket</div>
-                    <div>XMLHttpRequest</div>
-                    <div>.fetch</div>
-                    <div>socketcv.codemao.cn</div>
-                    <div>eval()</div>
-                    <div>document.write</div>
-                    <div>window.open</div>
-                    <div>innerHTML</div>
+                    <h3><i class="fas fa-ban"></i> 禁止关键字</h3>
+                    <div class="keywords-container">
+                        <span class="keyword-tag">parent.location</span>
+                        <span class="keyword-tag">top.location</span>
+                        <span class="keyword-tag">WebSocket</span>
+                        <span class="keyword-tag">XMLHttpRequest</span>
+                        <span class="keyword-tag">.fetch</span>
+                        <span class="keyword-tag">socketcv.codemao.cn</span>
+                        <span class="keyword-tag">eval()</span>
+                    </div>
                 </div>
-                
+
                 <div class="keyword-card warn">
-                    <strong>限制变量:</strong>
-                    <div>window</div>
-                    <div>getElementById</div>
-                    <div>history</div>
-                    <div>navigator</div>
-                    <div>userAgent</div>
-                    <div>localStorage</div>
-                    <div>top</div>
-                    <div>self</div>
-                    <div>parent</div>
-                    <div>frames</div>
-                    <div>opener</div>
-                    <div>fetch</div>
-                    <div>XMLHttpRequest</div>
-                    <div>location</div>
-                    <div>open</div>
-                    <div>alert</div>
-                    <div>confirm</div>
-                    <div>prompt</div>
-                    <div>print</div>
-                    <div>sessionStorage</div>
-                    <div>postMessage</div>
-                    <div>eval</div>
-                    <div>setTimeout</div>
-                    <div>setInterval</div>
+                    <h3><i class="fas fa-exclamation-circle"></i> 限制变量</h3>
+                    <div class="keywords-container">
+                        <span class="keyword-tag">window</span>
+                        <span class="keyword-tag">getElementById</span>
+                        <span class="keyword-tag">history</span>
+                        <span class="keyword-tag">navigator</span>
+                        <span class="keyword-tag">userAgent</span>
+                        <span class="keyword-tag">localStorage</span>
+                        <span class="keyword-tag">top</span>
+                        <span class="keyword-tag">self</span>
+                        <span class="keyword-tag">parent</span>
+                        <span class="keyword-tag">frames</span>
+                        <span class="keyword-tag">opener</span>
+                        <span class="keyword-tag">fetch</span>
+                        <span class="keyword-tag">XMLHttpRequest</span>
+                        <span class="keyword-tag">location</span>
+                        <span class="keyword-tag">open</span>
+                        <span class="keyword-tag">alert</span>
+                        <span class="keyword-tag">confirm</span>
+                        <span class="keyword-tag">prompt</span>
+                        <span class="keyword-tag">print</span>
+                        <span class="keyword-tag">sessionStorage</span>
+                        <span class="keyword-tag">postMessage</span>
+                        <span class="keyword-tag">eval</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div id="floating-menu">
+            快速修复
+            <div class="menu-item">new Function("return window")</div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // 创建粒子背景
+                createParticles();
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 创建粒子背景
-            createParticles();
-            
-            const codeInput = document.getElementById('codeInput');
-            const fileInput = document.getElementById('fileInput');
-            const uploadArea = document.getElementById('uploadArea');
-            const checkBtn = document.getElementById('checkBtn');
-            const clearBtn = document.getElementById('clearBtn');
-            const saveBtn = document.getElementById('saveBtn');
-            const examplesBtn = document.getElementById('examplesBtn');
-            const resultsContainer = document.getElementById('resultsContainer');
-            const errorCount = document.getElementById('errorCount');
-            const warningCount = document.getElementById('warningCount');
-            const lineCount = document.getElementById('lineCount');
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const errorStat = document.getElementById('errorStat');
-            const warningStat = document.getElementById('warningStat');
-            const lineStat = document.getElementById('lineStat');
-            
-            // 当前筛选状态
-            let currentFilter = 'all';
-            
-            // 禁止的关键字列表
-            const forbiddenKeywords = [
-                "parent.location",
-                "top.location",
-                "WebSocket",
-                "XMLHttpRequest",
-                ".fetch",
-                "socketcv.codemao.cn",
-                "eval(",
-                "document.write",
-                "window.open",
-                "innerHTML"
-            ];
-            
-            // 限制的变量列表
-            const restrictedVariables = [
-                "window",
-                "getElementById",
-                "history",
-                "navigator",
-                "userAgent",
-                "localStorage",
-                "top",
-                "self",
-                "parent",
-                "frames",
-                "opener",
-                "fetch",
-                "XMLHttpRequest",
-                "location",
-                "open",
-                "alert",
-                "confirm",
-                "prompt",
-                "print",
-                "sessionStorage",
-                "postMessage",
-                "eval",
-                "setTimeout",
-                "setInterval"
-            ];
-            
-            // 粒子背景创建
-            function createParticles() {
-                const particlesContainer = document.getElementById('particles');
-                const particleCount = 30;
-                
-                for (let i = 0; i < particleCount; i++) {
-                    const particle = document.createElement('div');
-                    particle.classList.add('particle');
-                    
-                    // 随机位置
-                    const posX = Math.random() * 100;
-                    const posY = Math.random() * 100;
-                    
-                    // 随机大小
-                    const size = Math.random() * 20 + 5;
-                    
-                    // 随机动画延迟
-                    const delay = Math.random() * 15;
-                    
-                    particle.style.left = `${posX}%`;
-                    particle.style.top = `${posY}%`;
-                    particle.style.width = `${size}px`;
-                    particle.style.height = `${size}px`;
-                    particle.style.animationDelay = `${delay}s`;
-                    particle.style.opacity = Math.random() * 0.5 + 0.1;
-                    
-                    particlesContainer.appendChild(particle);
-                }
-            }
-            
-            // 筛选按钮事件
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // 更新活动按钮
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    
-                    // 更新筛选状态
-                    currentFilter = button.dataset.filter;
-                    
-                    // 应用筛选
-                    applyFilter();
-                });
-            });
-            
-            // 应用筛选
-            function applyFilter() {
-                const resultItems = resultsContainer.querySelectorAll('.result-item');
-                let visibleCount = 0;
-                
-                // 首先隐藏所有结果项
-                resultItems.forEach(item => {
-                    item.style.display = 'none';
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateY(20px)';
-                });
-                
-                // 显示匹配筛选条件的结果项
-                resultItems.forEach(item => {
-                    const type = item.classList.contains('error') ? 'error' : 
-                                 item.classList.contains('warn') ? 'warn' : 'safe';
-                    
-                    if (currentFilter === 'all' || currentFilter === type) {
-                        item.style.display = 'flex';
-                        setTimeout(() => {
-                            item.style.opacity = '1';
-                            item.style.transform = 'translateY(0)';
-                        }, 10);
-                        visibleCount++;
+                const codeInput = document.getElementById('codeInput');
+                const fileInput = document.getElementById('fileInput');
+                const uploadArea = document.getElementById('uploadArea');
+                const checkBtn = document.getElementById('checkBtn');
+                const clearBtn = document.getElementById('clearBtn');
+                const saveBtn = document.getElementById('saveBtn');
+                const examplesBtn = document.getElementById('examplesBtn');
+                const resultsContainer = document.getElementById('resultsContainer');
+                const errorCount = document.getElementById('errorCount');
+                const warningCount = document.getElementById('warningCount');
+                const lineCount = document.getElementById('lineCount');
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const errorStat = document.getElementById('errorStat');
+                const warningStat = document.getElementById('warningStat');
+                const lineStat = document.getElementById('lineStat');
+                const floatingMenu = document.getElementById('floating-menu')
+                // 当前筛选状态
+                let currentFilter = 'all';
+
+                // 禁止的关键字列表
+                const forbiddenKeywords = [
+                    "parent.location",
+                    "top.location",
+                    "WebSocket",
+                    "XMLHttpRequest",
+                    ".fetch",
+                    "socketcv.codemao.cn"
+                ];
+
+                // 限制的变量列表
+                const restrictedVariables = [
+                    "window",
+                    "getElementById",
+                    "history",
+                    "navigator",
+                    "userAgent",
+                    "localStorage",
+                    "top",
+                    "self",
+                    "parent",
+                    "frames",
+                    "opener",
+                    "fetch",
+                    "XMLHttpRequest",
+                    "location",
+                    "open",
+                    "alert",
+                    "confirm",
+                    "prompt",
+                    "print",
+                    "sessionStorage",
+                    "postMessage",
+                    "eval"
+                ];
+
+                // 粒子背景创建
+                function createParticles() {
+                    const particlesContainer = document.getElementById('particles');
+                    const particleCount = 30;
+
+                    for (let i = 0; i < particleCount; i++) {
+                        const particle = document.createElement('div');
+                        particle.classList.add('particle');
+
+                        // 随机位置
+                        const posX = Math.random() * 100;
+                        const posY = Math.random() * 100;
+
+                        // 随机大小
+                        const size = Math.random() * 20 + 5;
+
+                        // 随机动画延迟
+                        const delay = Math.random() * 15;
+
+                        particle.style.left = `${posX}%`;
+                        particle.style.top = `${posY}%`;
+                        particle.style.width = `${size}px`;
+                        particle.style.height = `${size}px`;
+                        particle.style.animationDelay = `${delay}s`;
+                        particle.style.opacity = Math.random() * 0.5 + 0.1;
+
+                        particlesContainer.appendChild(particle);
                     }
+                }
+
+                // 筛选按钮事件
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        // 更新活动按钮
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+
+                        // 更新筛选状态
+                        currentFilter = button.dataset.filter;
+
+                        // 应用筛选
+                        applyFilter();
+                    });
                 });
-                
-                // 如果没有结果显示
-                if (visibleCount === 0) {
-                    const noResults = document.createElement('div');
-                    noResults.className = 'no-results';
-                    noResults.innerHTML = `
+
+                // 应用筛选
+                function applyFilter() {
+                    const resultItems = resultsContainer.querySelectorAll('.result-item');
+                    let visibleCount = 0;
+
+                    // 首先隐藏所有结果项
+                    resultItems.forEach(item => {
+                        item.style.display = 'none';
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(20px)';
+                    });
+
+                    // 显示匹配筛选条件的结果项
+                    resultItems.forEach(item => {
+                        const type = item.classList.contains('error') ? 'error' :
+                            item.classList.contains('warn') ? 'warn' : 'safe';
+
+                        if (currentFilter === 'all' || currentFilter === type) {
+                            item.style.display = 'flex';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 10);
+                            visibleCount++;
+                        }
+                    });
+
+                    // 如果没有结果显示
+                    if (visibleCount === 0) {
+                        const noResults = document.createElement('div');
+                        noResults.className = 'no-results';
+                        noResults.innerHTML = `
                         <i class="fas fa-search"></i>
                         <h3>没有找到${getFilterName(currentFilter)}内容</h3>
                         <p>当前筛选条件没有匹配的结果</p>
                     `;
-                    
-                    // 移除原有的无结果提示（如果有）
-                    const existingNoResults = resultsContainer.querySelector('.no-results');
-                    if (existingNoResults) {
-                        existingNoResults.remove();
+
+                        // 移除原有的无结果提示（如果有）
+                        const existingNoResults = resultsContainer.querySelector('.no-results');
+                        if (existingNoResults) {
+                            existingNoResults.remove();
+                        }
+
+                        resultsContainer.appendChild(noResults);
+                    } else {
+                        // 移除无结果提示（如果有）
+                        const noResults = resultsContainer.querySelector('.no-results');
+                        if (noResults) {
+                            noResults.remove();
+                        }
                     }
-                    
-                    resultsContainer.appendChild(noResults);
-                } else {
-                    // 移除无结果提示（如果有）
-                    const noResults = resultsContainer.querySelector('.no-results');
-                    if (noResults) {
-                        noResults.remove();
+                }
+
+                // 获取筛选名称
+                function getFilterName(filter) {
+                    switch (filter) {
+                        case 'error': return '错误';
+                        case 'warn': return '警告';
+                        case 'safe': return '安全';
+                        default: return '';
                     }
                 }
-            }
-            
-            // 获取筛选名称
-            function getFilterName(filter) {
-                switch(filter) {
-                    case 'error': return '错误';
-                    case 'warn': return '警告';
-                    case 'safe': return '安全';
-                    default: return '';
-                }
-            }
-            
-            // 点击上传区域触发文件选择
-            uploadArea.addEventListener('click', () => {
-                fileInput.click();
-            });
-            
-            // 文件选择处理
-            fileInput.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    readFile(file);
-                }
-            });
-            
-            // 拖放功能
-            uploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadArea.style.background = 'rgba(230, 247, 255, 0.7)';
-                uploadArea.style.borderColor = 'var(--accent-blue)';
-            });
-            
-            uploadArea.addEventListener('dragleave', () => {
-                uploadArea.style.background = 'rgba(230, 247, 255, 0.4)';
-                uploadArea.style.borderColor = 'var(--primary-blue)';
-            });
-            
-            uploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadArea.style.background = 'rgba(230, 247, 255, 0.4)';
-                uploadArea.style.borderColor = 'var(--primary-blue)';
-                
-                const file = e.dataTransfer.files[0];
-                if (file) {
-                    readFile(file);
-                }
-            });
-            
-            // 读取文件内容
-            function readFile(file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    codeInput.value = e.target.result;
-                    updateLineCount();
-                    
-                    // 添加上传成功反馈
-                    uploadArea.innerHTML = `
+
+                // 点击上传区域触发文件选择
+                uploadArea.addEventListener('click', () => {
+                    fileInput.click();
+                });
+
+                // 文件选择处理
+                fileInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        readFile(file);
+                    }
+                });
+
+                // 拖放功能
+                uploadArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    uploadArea.style.background = 'rgba(230, 247, 255, 0.7)';
+                    uploadArea.style.borderColor = 'var(--accent-blue)';
+                });
+
+                uploadArea.addEventListener('dragleave', () => {
+                    uploadArea.style.background = 'rgba(230, 247, 255, 0.4)';
+                    uploadArea.style.borderColor = 'var(--primary-blue)';
+                });
+
+                uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    uploadArea.style.background = 'rgba(230, 247, 255, 0.4)';
+                    uploadArea.style.borderColor = 'var(--primary-blue)';
+
+                    const file = e.dataTransfer.files[0];
+                    if (file) {
+                        readFile(file);
+                    }
+                });
+
+                // 读取文件内容
+                function readFile(file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        codeInput.value = e.target.result;
+                        updateLineCount();
+
+                        // 添加上传成功反馈
+                        uploadArea.innerHTML = `
                         <i class="fas fa-check-circle" style="color:var(--success);"></i>
                         <div class="upload-text">已加载: ${file.name}</div>
                         <div class="upload-text">文件大小: ${formatFileSize(file.size)}</div>
                     `;
-                    uploadArea.classList.add('file-uploaded');
-                    
-                    setTimeout(() => {
-                        uploadArea.classList.remove('file-uploaded');
-                        uploadArea.innerHTML = `
+                        uploadArea.classList.add('file-uploaded');
+
+                        setTimeout(() => {
+                            uploadArea.classList.remove('file-uploaded');
+                            uploadArea.innerHTML = `
                             <i class="fas fa-cloud-upload-alt"></i>
                             <div class="upload-text">拖放控件文件到此处</div>
                             <div class="upload-text">或 <span class="highlight">点击此处</span> 选择文件</div>
                         `;
-                    }, 3000);
-                };
-                reader.readAsText(file);
-            }
-            
-            function formatFileSize(bytes) {
-                if (bytes < 1024) return bytes + " bytes";
-                else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + " KB";
-                else return (bytes / 1048576).toFixed(1) + " MB";
-            }
-            
-            // 检查代码按钮
-            checkBtn.addEventListener('click', () => {
-                const code = codeInput.value;
-                if (!code.trim()) {
-                    showNotification('请输入代码或上传文件', 'error');
-                    return;
+                        }, 3000);
+                    };
+                    reader.readAsText(file);
                 }
-                
-                // 添加加载效果
-                codeInput.classList.add('loading');
-                setTimeout(() => {
-                    codeInput.classList.remove('loading');
-                    checkCode(code);
-                }, 800);
-            });
-            
-            // 清除按钮
-            clearBtn.addEventListener('click', () => {
-                // 添加清除动画
-                clearBtn.querySelector('i').classList.add('fa-spin');
-                setTimeout(() => {
-                    clearBtn.querySelector('i').classList.remove('fa-spin');
-                }, 1000);
-                
-                // 重置代码输入
-                codeInput.value = '';
-                
-                // 重置结果区域
-                resultsContainer.innerHTML = `
+
+                function formatFileSize(bytes) {
+                    if (bytes < 1024) return bytes + " bytes";
+                    else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + " KB";
+                    else return (bytes / 1048576).toFixed(1) + " MB";
+                }
+
+                // 检查代码按钮
+                checkBtn.addEventListener('click', () => {
+                    function removeStrings(code) { let result = ''; let i = 0; const n = code.length; let inSingleQuote = false; let inDoubleQuote = false; let inTemplate = false; let inSingleLineComment = false; let inMultiLineComment = false; let escapeNext = false; while (i < n) { const char = code[i]; const nextChar = i < n - 1 ? code[i + 1] : ''; if (char === '\n') { result += '\n'; if (inSingleLineComment) { inSingleLineComment = false } i++; escapeNext = false; continue } if (escapeNext) { escapeNext = false; i++; continue } if ((inSingleQuote || inDoubleQuote || inTemplate) && char === '\\') { escapeNext = true; i++; continue } if (!inSingleQuote && !inDoubleQuote && !inTemplate && !inSingleLineComment && !inMultiLineComment) { if (char === '/' && nextChar === '/') { inSingleLineComment = true; i += 2; continue } if (char === '/' && nextChar === '*') { inMultiLineComment = true; i += 2; continue } if (char === "'") { inSingleQuote = true; i++; continue } if (char === '"') { inDoubleQuote = true; i++; continue } if (char === '`') { inTemplate = true; i++; continue } } if (inSingleLineComment) { i++; continue } if (inMultiLineComment) { if (char === '*' && nextChar === '/') { inMultiLineComment = false; i += 2; continue } i++; continue } if (inSingleQuote) { if (char === "'") { inSingleQuote = false; i++; continue } i++; continue } if (inDoubleQuote) { if (char === '"') { inDoubleQuote = false; i++; continue } i++; continue } if (inTemplate) { if (char === '`') { inTemplate = false; i++; continue } i++; continue } result += char; i++ } return result }
+                    const code = codeInput.value;
+                    if (!code.trim()) {
+                        showNotification('请输入代码或上传文件', 'error');
+                        return;
+                    }
+
+                    // 添加加载效果
+                    codeInput.classList.add('loading');
+                    setTimeout(() => {
+                        codeInput.classList.remove('loading');
+                        checkCode(removeStrings(code), code);
+                    }, 1);
+                });
+
+                // 清除按钮
+                clearBtn.addEventListener('click', () => {
+                    // 添加清除动画
+                    clearBtn.querySelector('i').classList.add('fa-spin');
+                    setTimeout(() => {
+                        clearBtn.querySelector('i').classList.remove('fa-spin');
+                    }, 1000);
+
+                    // 重置代码输入
+                    codeInput.value = '';
+
+                    // 重置结果区域
+                    resultsContainer.innerHTML = `
                     <div style="text-align:center; padding:50px 20px; color:#666; font-size:1.1rem;">
                         <i class="fas fa-clipboard-list" style="font-size:3rem; margin-bottom:20px; color:var(--primary-blue);"></i>
                         <p>输入代码后点击"检查代码"，结果将显示在这里</p>
                     </div>
                 `;
-                
-                // 重置统计
-                errorCount.textContent = '0';
-                warningCount.textContent = '0';
-                lineCount.textContent = '0';
-                
-                // 重置文件输入和上传区域
-                fileInput.value = '';
-                uploadArea.innerHTML = `
+
+                    // 重置统计
+                    errorCount.textContent = '0';
+                    warningCount.textContent = '0';
+                    lineCount.textContent = '0';
+
+                    // 重置文件输入和上传区域
+                    fileInput.value = '';
+                    uploadArea.innerHTML = `
                     <i class="fas fa-cloud-upload-alt"></i>
                     <div class="upload-text">拖放控件文件到此处</div>
                     <div class="upload-text">或 <span class="highlight">点击此处</span> 选择文件</div>
                 `;
-                
-                // 重置筛选
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
-                currentFilter = 'all';
-                
-                showNotification('内容已清除', 'success');
-            });
-            
-            // 保存报告按钮
-            saveBtn.addEventListener('click', () => {
-                if (!resultsContainer.querySelector('.result-item')) {
-                    showNotification('没有可保存的结果', 'warning');
-                    return;
-                }
-                
-                // 添加保存动画
-                saveBtn.querySelector('i').classList.add('fa-beat');
-                setTimeout(() => {
-                    saveBtn.querySelector('i').classList.remove('fa-beat');
-                }, 1000);
-                
-                const content = generateReportContent();
-                const blob = new Blob([content], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = '代码检查报告.txt';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                
-                showNotification('报告已保存', 'success');
-            });
-            
-            // 示例代码按钮
-            examplesBtn.addEventListener('click', () => {
-                // 添加加载动画
-                examplesBtn.querySelector('i').classList.add('fa-shake');
-                setTimeout(() => {
-                    examplesBtn.querySelector('i').classList.remove('fa-shake');
-                }, 500);
-                
-                const examples = [
-                    {
-                        name: "WebSocket示例",
-                        code: `// WebSocket使用示例（禁止）
+
+                    // 重置筛选
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+                    currentFilter = 'all';
+
+                    showNotification('内容已清除', 'success');
+                });
+
+                // 保存报告按钮
+                saveBtn.addEventListener('click', () => {
+                    if (!resultsContainer.querySelector('.result-item')) {
+                        showNotification('没有可保存的结果', 'warning');
+                        return;
+                    }
+
+                    // 添加保存动画
+                    saveBtn.querySelector('i').classList.add('fa-beat');
+                    setTimeout(() => {
+                        saveBtn.querySelector('i').classList.remove('fa-beat');
+                    }, 1000);
+
+                    const content = generateReportContent();
+                    const blob = new Blob([content], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = '代码检查报告.txt';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+
+                    showNotification('报告已保存', 'success');
+                });
+
+                // 示例代码按钮
+                examplesBtn.addEventListener('click', () => {
+                    // 添加加载动画
+                    examplesBtn.querySelector('i').classList.add('fa-shake');
+                    setTimeout(() => {
+                        examplesBtn.querySelector('i').classList.remove('fa-shake');
+                    }, 500);
+
+                    const examples = [
+                        {
+                            name: "WebSocket示例",
+                            code: `// WebSocket使用示例（禁止）
 function connectWebSocket() {
     const socket = new WebSocket('wss://example.com');
     socket.onmessage = function(event) {
@@ -1401,10 +1662,10 @@ function connectWebSocket() {
     // 另一个禁止关键字
     top.location = 'https://example.com';
 }`
-                    },
-                    {
-                        name: "安全代码示例",
-                        code: `// 安全代码示例
+                        },
+                        {
+                            name: "安全代码示例",
+                            code: `// 安全代码示例
 function safeFunction() {
     // 安全的使用方式
     const safeVar = "安全内容";
@@ -1416,10 +1677,10 @@ function safeFunction() {
     const deviceInfo = harmonyos.device.getInfo();
     console.log('设备类型:', deviceInfo.deviceType);
 }`
-                    },
-                    {
-                        name: "混合代码示例",
-                        code: `// 混合代码（包含禁止和限制内容）
+                        },
+                        {
+                            name: "混合代码示例",
+                            code: `// 混合代码（包含禁止和限制内容）
 function mixedExample() {
     // 禁止的关键字
     const xhr = new XMLHttpRequest();
@@ -1440,207 +1701,224 @@ function mixedExample() {
         console.log(i);
     }
 }`
-                    }
-                ];
-                
-                const randomExample = examples[Math.floor(Math.random() * examples.length)];
-                codeInput.value = randomExample.code;
-                updateLineCount();
-                
-                showNotification(`已加载示例: ${randomExample.name}`, 'success');
-            });
-            
-            // 点击统计卡片筛选结果
-            errorStat.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                document.querySelector('.filter-btn[data-filter="error"]').classList.add('active');
-                currentFilter = 'error';
-                applyFilter();
-            });
-            
-            warningStat.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                document.querySelector('.filter-btn[data-filter="warn"]').classList.add('active');
-                currentFilter = 'warn';
-                applyFilter();
-            });
-            
-            lineStat.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
-                currentFilter = 'all';
-                applyFilter();
-            });
-            
-            // 代码输入时更新行数
-            codeInput.addEventListener('input', updateLineCount);
-            
-            function updateLineCount() {
-                const lines = codeInput.value.split('\n').length;
-                lineCount.textContent = lines;
-            }
-            
-            // 检查代码逻辑
-            function checkCode(code) {
-                // 重置结果
-                resultsContainer.innerHTML = '';
-                let errorTotal = 0;
-                let warningTotal = 0;
-                
-                const lines = code.split('\n');
-                let hasResults = false;
-                
-                for (let i = 0; i < lines.length; i++) {
-                    const line = lines[i];
-                    const lineNumber = i + 1;
-                    let lineHasError = false;
-                    let lineHasWarning = false;
-                    
-                    // 检查禁止关键字
-                    for (const keyword of forbiddenKeywords) {
-                        if (line.includes(keyword)) {
-                            const resultItem = document.createElement('div');
-                            resultItem.className = 'result-item error animated';
-                            resultItem.setAttribute('data-type', 'error');
-                            resultItem.innerHTML = `
-                                <div class="line-number"><i class="fas fa-ban"></i> ${lineNumber}</div>
-                                <div>${escapeHtml(line.trim())} <span style="color:var(--error)">(禁止的关键字: ${keyword})</span></div>
-                            `;
-                            resultsContainer.appendChild(resultItem);
-                            errorTotal++;
-                            hasResults = true;
-                            lineHasError = true;
-                            break;
                         }
-                    }
-                    
-                    // 如果没有错误，检查限制变量
-                    if (!lineHasError) {
-                        for (const variable of restrictedVariables) {
-                            if (line.includes(variable)) {
+                    ];
+
+                    const randomExample = examples[Math.floor(Math.random() * examples.length)];
+                    codeInput.value = randomExample.code;
+                    updateLineCount();
+
+                    showNotification(`已加载示例: ${randomExample.name}`, 'success');
+                });
+
+                // 点击统计卡片筛选结果
+                errorStat.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('.filter-btn[data-filter="error"]').classList.add('active');
+                    currentFilter = 'error';
+                    applyFilter();
+                });
+
+                warningStat.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('.filter-btn[data-filter="warn"]').classList.add('active');
+                    currentFilter = 'warn';
+                    applyFilter();
+                });
+
+                lineStat.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+                    currentFilter = 'all';
+                    applyFilter();
+                });
+
+                // 代码输入时更新行数
+                codeInput.addEventListener('input', updateLineCount);
+
+                function updateLineCount() {
+                    const lines = codeInput.value.split('\n').length;
+                    lineCount.textContent = lines;
+                }
+                // 检查代码逻辑
+                function checkCode(code, realCode) {
+                    // 重置结果
+                    resultsContainer.innerHTML = '';
+                    let errorTotal = 0;
+                    let warningTotal = 0;
+
+                    const lines = code.split('\n');
+                    const realLines = realCode.split('\n');
+                    let hasResults = false;
+
+                    for (let i = 0; i < lines.length; i++) {
+                        const line = lines[i];
+                        const realLine = realLines[i];
+                        const lineNumber = i + 1;
+                        let lineHasError = false;
+                        let lineHasWarning = false;
+
+                        // 检查禁止关键字
+                        for (const keyword of forbiddenKeywords) {
+                            if (line.includes(keyword)) {
                                 const resultItem = document.createElement('div');
-                                resultItem.className = 'result-item warn animated';
-                                resultItem.setAttribute('data-type', 'warn');
+                                resultItem.className = 'result-item error animated';
+                                resultItem.setAttribute('data-type', 'error');
                                 resultItem.innerHTML = `
-                                    <div class="line-number"><i class="fas fa-exclamation-triangle"></i> ${lineNumber}</div>
-                                    <div>${escapeHtml(line.trim())} <span style="color:var(--warning)">(被限制的变量: ${variable})</span></div>
+                                <div class="line-number"><i class="fas fa-ban"></i> ${lineNumber}</div>
+                                <div>${escapeHtml(realLine.trim())
+                                        .replaceAll(keyword,
+                                            `<span class="error-code">${keyword}</span>`)
+                                    } <br><span style="color:var(--error);display: none">(禁止的关键字: ${keyword})</span></div>
                                 `;
                                 resultsContainer.appendChild(resultItem);
-                                warningTotal++;
+                                errorTotal++;
                                 hasResults = true;
-                                lineHasWarning = true;
+                                lineHasError = true;
                                 break;
                             }
                         }
-                    }
-                    
-                    // 如果既没有错误也没有警告，显示安全行（仅显示非空行）
-                    if (!lineHasError && !lineHasWarning && line.trim() !== '') {
-                        const resultItem = document.createElement('div');
-                        resultItem.className = 'result-item safe animated';
-                        resultItem.setAttribute('data-type', 'safe');
-                        resultItem.innerHTML = `
+                        resultsContainer.querySelectorAll('span.error-code').forEach((span) => {
+                            span.addEventListener('mouseover', (e) => {
+                                floatingMenu.style.left = e.pageX + 'px';
+                                floatingMenu.style.top = e.pageY - 50 + 'px';
+                            });
+                            span.addEventListener('mouseout', (e) => {
+                                floatingMenu.style.left = '-1000px';
+                                floatingMenu.style.top = '-1000px';
+                            });
+                        });
+                        // 如果没有错误，检查限制变量
+                        if (!lineHasError) {
+                            for (const variable of restrictedVariables) {
+                                if (line.includes(variable)) {
+                                    const resultItem = document.createElement('div');
+                                    resultItem.className = 'result-item warn animated';
+                                    resultItem.setAttribute('data-type', 'warn');
+                                    resultItem.innerHTML = `
+                                    <div class="line-number"><i class="fas fa-exclamation-triangle"></i> ${lineNumber}</div>
+                                    <div>${escapeHtml(realLine.trim())
+                                            .replaceAll(variable,
+                                                `<span class="warn-code">${variable}</span>`)
+                                        } <br><span style="color:var(--warning);display: none">(被限制的变量: ${variable})</span></div>
+                                    `;
+                                    resultsContainer.appendChild(resultItem);
+                                    warningTotal++;
+                                    hasResults = true;
+                                    lineHasWarning = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        // 如果既没有错误也没有警告，显示安全行（仅显示非空行）
+                        // if (!lineHasError && !lineHasWarning && line.trim() !== '') {
+                        if (false) {
+                            const resultItem = document.createElement('div');
+                            resultItem.className = 'result-item safe animated';
+                            resultItem.setAttribute('data-type', 'safe');
+                            resultItem.innerHTML = `
                             <div class="line-number"><i class="fas fa-check-circle"></i> ${lineNumber}</div>
-                            <div>${escapeHtml(line.trim())}</div>
+                            <div>${escapeHtml(realLine.trim())}</div>
                         `;
-                        resultsContainer.appendChild(resultItem);
-                        hasResults = true;
+                            resultsContainer.appendChild(resultItem);
+                            hasResults = true;
+                        }
                     }
-                }
-                
-                // 如果没有结果，显示提示
-                if (!hasResults) {
-                    resultsContainer.innerHTML = `
+
+                    // 如果没有结果，显示提示
+                    if (!hasResults) {
+                        resultsContainer.innerHTML = `
                         <div class="result-item safe" style="justify-content:center; text-align:center; animation: fadeInBounce 1s;">
                             <i class="fas fa-check-circle" style="color:var(--success); font-size:2rem; margin-right:15px;"></i>
                             <div style="font-size:1.3rem; font-weight:bold;">未检测到禁止关键字或限制变量！</div>
                         </div>
                     `;
-                }
-                
-                // 更新统计
-                errorCount.textContent = errorTotal;
-                warningCount.textContent = warningTotal;
-                lineCount.textContent = lines.length;
-                
-                // 添加统计更新动画
-                if (errorTotal > 0) errorStat.classList.add('updated');
-                if (warningTotal > 0) warningStat.classList.add('updated');
-                lineStat.classList.add('updated');
-                
-                setTimeout(() => {
-                    errorStat.classList.remove('updated');
-                    warningStat.classList.remove('updated');
-                    lineStat.classList.remove('updated');
-                }, 800);
-                
-                // 应用当前筛选
-                applyFilter();
-                
-                showNotification(`检查完成: ${errorTotal}个错误, ${warningTotal}个警告`, 
-                                errorTotal > 0 ? 'error' : (warningTotal > 0 ? 'warning' : 'success'));
-            }
-            
-            function escapeHtml(text) {
-                return text
-                    .replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;")
-                    .replace(/"/g, "&quot;")
-                    .replace(/'/g, "&#039;");
-            }
-            
-            function generateReportContent() {
-                let report = `===== CoCo自定义控件代码检查报告 =====\n`;
-                report += `生成时间: ${new Date().toLocaleString()}\n`;
-                report += `代码行数: ${lineCount.textContent}\n`;
-                report += `禁止关键字: ${errorCount.textContent}\n`;
-                report += `限制变量: ${warningCount.textContent}\n\n`;
-                report += `===== 详细结果 =====\n\n`;
-                
-                const results = resultsContainer.querySelectorAll('.result-item');
-                results.forEach(item => {
-                    const lineNumber = item.querySelector('.line-number').textContent.trim();
-                    const content = item.querySelector('div:not(.line-number)').textContent.trim();
-                    
-                    if (item.classList.contains('error')) {
-                        report += `[错误] ${lineNumber}: ${content}\n`;
-                    } else if (item.classList.contains('warn')) {
-                        report += `[警告] ${lineNumber}: ${content}\n`;
-                    } else {
-                        report += `[安全] ${lineNumber}: ${content}\n`;
                     }
-                });
-                
-                return report;
-            }
-            
-            function showNotification(message, type) {
-                const notification = document.createElement('div');
-                notification.className = `notification ${type}`;
-                notification.innerHTML = `
+
+                    // 更新统计
+                    errorCount.textContent = errorTotal;
+                    warningCount.textContent = warningTotal;
+                    lineCount.textContent = lines.length;
+
+                    // 添加统计更新动画
+                    if (errorTotal > 0) errorStat.classList.add('updated');
+                    if (warningTotal > 0) warningStat.classList.add('updated');
+                    lineStat.classList.add('updated');
+
+                    setTimeout(() => {
+                        errorStat.classList.remove('updated');
+                        warningStat.classList.remove('updated');
+                        lineStat.classList.remove('updated');
+                    }, 800);
+
+                    // 应用当前筛选
+                    applyFilter();
+
+                    showNotification(`检查完成: ${errorTotal}个错误, ${warningTotal}个警告`,
+                        errorTotal > 0 ? 'error' : (warningTotal > 0 ? 'warning' : 'success'));
+                }
+
+                function escapeHtml(text) {
+                    return text
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#039;");
+                }
+
+                function generateReportContent() {
+                    let report = `===== CoCo自定义控件代码检查报告 =====\n`;
+                    report += `生成时间: ${new Date().toLocaleString()}\n`;
+                    report += `代码行数: ${lineCount.textContent}\n`;
+                    report += `禁止关键字: ${errorCount.textContent}\n`;
+                    report += `限制变量: ${warningCount.textContent}\n\n`;
+                    report += `===== 详细结果 =====\n\n`;
+
+                    const results = resultsContainer.querySelectorAll('.result-item');
+                    results.forEach(item => {
+                        const lineNumber = item.querySelector('.line-number').textContent.trim();
+                        const content = item.querySelector('div:not(.line-number)').textContent.trim();
+
+                        if (item.classList.contains('error')) {
+                            report += `[错误] ${lineNumber}: ${content}\n`;
+                        } else if (item.classList.contains('warn')) {
+                            report += `[警告] ${lineNumber}: ${content}\n`;
+                        } else {
+                            report += `[安全] ${lineNumber}: ${content}\n`;
+                        }
+                    });
+
+                    return report;
+                }
+
+                function showNotification(message, type) {
+                    const notification = document.createElement('div');
+                    notification.className = `notification ${type}`;
+                    notification.innerHTML = `
                     <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'times-circle'}"></i>
                     <span>${message}</span>
                 `;
-                
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    notification.style.opacity = '1';
-                    notification.style.transform = 'translateY(0)';
-                }, 10);
-                
-                setTimeout(() => {
-                    notification.style.opacity = '0';
-                    notification.style.transform = 'translateY(-20px)';
+
+                    document.body.appendChild(notification);
+
                     setTimeout(() => {
-                        document.body.removeChild(notification);
-                    }, 300);
-                }, 3000);
-            }
-            
-            // 初始示例代码
-            codeInput.value = `// 示例代码
+                        notification.style.opacity = '1';
+                        notification.style.transform = 'translateY(0)';
+                    }, 10);
+
+                    setTimeout(() => {
+                        notification.style.opacity = '0';
+                        notification.style.transform = 'translateY(-20px)';
+                        setTimeout(() => {
+                            document.body.removeChild(notification);
+                        }, 300);
+                    }, 3000);
+                }
+
+                // 初始示例代码
+                codeInput.value = `// 示例代码
 function test() {
     // 禁止关键字示例
     const ws = new WebSocket('ws://example.com');
@@ -1660,12 +1938,12 @@ function test() {
     console.log('这是安全代码');
     const safeVar = "安全变量";
 }`;
-            
-            updateLineCount();
-            
-            // 添加通知样式
-            const style = document.createElement('style');
-            style.textContent = `
+
+                updateLineCount();
+
+                // 添加通知样式
+                const style = document.createElement('style');
+                style.textContent = `
                 .notification {
                     position: fixed;
                     top: 30px;
@@ -1700,8 +1978,9 @@ function test() {
                     font-size: 1.5rem;
                 }
             `;
-            document.head.appendChild(style);
-        });
-    </script>
+                document.head.appendChild(style);
+            });
+        </script>
 </body>
+
 </html>
