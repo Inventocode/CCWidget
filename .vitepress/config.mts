@@ -16,6 +16,7 @@ export default defineConfig({
       { text: '参考', link: '/API参考' },
       { text: '工具', link: '/tools/'},
       { text: '控件商城', link: '/控件商城' },
+      { text: 'CoCo Next', link: 'https://next.ccwidget.top/editor/'  },
       {
         text: '站外工具', items: [
           { text: '编程猫网盘', link: 'https://shequ.pgaot.com/?mod=codemaocdn' },
