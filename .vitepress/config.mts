@@ -16,13 +16,14 @@ export default defineConfig({
       { text: '参考', link: '/API参考' },
       { text: '工具', link: '/tools/'},
       { text: '控件商城', link: '/控件商城' },
-      { text: 'CoCo Next', link: 'https://next.ccwidget.top/editor/'  },
       {
-        text: '站外工具', items: [
+        text: '快速访问', items: [
           { text: '编程猫网盘', link: 'https://shequ.pgaot.com/?mod=codemaocdn' },
           { text: 'Waddle', link: 'https://waddle.cocotais.cn/' },
           { text: 'DuckSeek写控件', link: 'https://chat.deepseek.com/' },
           { text: '棕榈酸鸭AI控件', link: 'https://www.tbox.cn/share/202508APAvTl00517109' },
+          { text: 'CoCo Next', link: 'https://next.ccwidget.top/editor/'  },
+          { text: 'CoCo Next (备用)', link: 'https://coco.ccwidget.top/editor/'  },
         ]
       }
     ],
